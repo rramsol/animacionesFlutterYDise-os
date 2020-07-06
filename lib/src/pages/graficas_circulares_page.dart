@@ -32,7 +32,11 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
           padding: EdgeInsets.all(5.0),
           width: 300,
           height: 300,
-          child: RadialProgressMio(porcentaje: porcentaje),
+          child: RadialProgressMio(
+            porcentaje: porcentaje,
+            colorPrimario: Colors.green,
+            colorSecundario: Colors.red,
+          ),
         ),
       ),
     );
