@@ -1,6 +1,8 @@
 
-import 'package:backgroundscustompainter/src/pages/slideshow_page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:backgroundscustompainter/src/pages/pinteres_page.dart';
+
 
 
 
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: SlideShowPage(),
+      home: PinteresPage(),
     );
   }
 }
