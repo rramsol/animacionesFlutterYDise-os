@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HeaderCuadrado extends StatelessWidget {
   @override
@@ -337,4 +338,79 @@ class _HeaderWaveGradientPainter extends CustomPainter {
     return true;
   }
 
+}
+
+
+//emergencyPAGE
+class IconHeader extends StatelessWidget {
+
+  final IconData iconFondo;
+  final IconData iconPrincipal;
+  final String titulo;
+  final String subTitulo;
+  final Color color1;
+  final Color color2;
+
+  const IconHeader({
+    @required this.iconFondo,
+    @required this.titulo,
+    @required this.subTitulo,
+    this.color1 = Colors.blueGrey,
+    this.color2 = Colors.greenAccent,
+    @required this.iconPrincipal,
+
+});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        _IconHeaderBack(color1: this.color1, color2: this.color2,),
+        Positioned(
+          top: -50,
+          left: -70,
+          child: FaIcon(this.iconFondo, size: 225,color: Colors.white.withOpacity(0.2),),
+        ),
+        Column(
+          children: <Widget>[
+            SizedBox(height: 80,width: double.infinity,),
+            Text(this.titulo, style: TextStyle(color: Colors.white,fontSize: 20),),
+            SizedBox(height: 20,),
+            Text(this.subTitulo, style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
+            SizedBox(height: 20,),
+            FaIcon(this.iconPrincipal, size: 80,color: Colors.white,),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _IconHeaderBack extends StatelessWidget {
+
+  final Color color1;
+  final Color color2;
+
+  const _IconHeaderBack({this.color1, this.color2});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 300,
+      decoration: BoxDecoration(
+        color: Colors.red,
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(90)),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            color1,
+            color2
+          ]
+        ),
+      ),
+    );
+  }
 }

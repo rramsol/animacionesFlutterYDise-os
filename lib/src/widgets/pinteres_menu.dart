@@ -16,15 +16,17 @@ class PinteresButton {
 class PinteresMenu extends StatelessWidget {
 
   final bool mostrar;
+  final Color activeColor;
+  final Color inactiveColor;
+  final List<PinteresButton> items;
 
-  PinteresMenu({this.mostrar = true});
+  PinteresMenu({
+    this.mostrar = true,
+    this.activeColor = Colors.black,
+    this.inactiveColor =Colors.blueGrey,
+    @required this.items,
+  });
 
-final List<PinteresButton> items = [
-  PinteresButton(icon:Icons.pie_chart,onPressed: (){print('icon pie_chart');}),
-  PinteresButton(icon:Icons.search,onPressed: (){print('icon search');}),
-  PinteresButton(icon:Icons.notification_important,onPressed: (){print('icon notification_important');}),
-  PinteresButton(icon:Icons.supervised_user_circle,onPressed: (){print('icon supervised_user_circle');}),
-];
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,13 @@ final List<PinteresButton> items = [
         duration: Duration(milliseconds: 400),
         opacity: ( mostrar ) ? 1 : 0 ,
         child: _PinteresMenuBackground(
-          child: _MenuItems(items),
+          child: Builder(
+            builder: (context){
+              Color activeColor =  Provider.of<_MenuModel>(context).activeColor = this.activeColor;
+              Color inactiveColor =  Provider.of<_MenuModel>(context).inactiveColor = this.inactiveColor;
+              return _MenuItems(items);
+            },
+          ),
         ),
       ),
     );
@@ -94,6 +102,9 @@ class _PinterestMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final itemSeleccionado = Provider.of<_MenuModel>(context).itemSeleccionado;
+    Color activeColor =  Provider.of<_MenuModel>(context).activeColor;
+    Color inactiveColor =  Provider.of<_MenuModel>(context).inactiveColor;
+
 
     return GestureDetector(
       onTap: (){
@@ -104,7 +115,7 @@ class _PinterestMenuButton extends StatelessWidget {
       child: Container(
         child: Icon(item.icon,
         size: ( itemSeleccionado == index )? 35: 25,
-          color:( itemSeleccionado == index )? Colors.black: Colors.blueGrey,
+          color:( itemSeleccionado == index )? activeColor: inactiveColor,
         ),
       ),
     );
@@ -115,6 +126,8 @@ class _PinterestMenuButton extends StatelessWidget {
 class _MenuModel with ChangeNotifier{
 
   int _itemSeleccionado = 0;
+  Color _activeColor =Colors.red ;
+  Color _inactiveColor =Colors.yellowAccent;
 
   int get itemSeleccionado => this._itemSeleccionado;
 
@@ -123,6 +136,15 @@ class _MenuModel with ChangeNotifier{
     notifyListeners();
   }
 
+  Color get activeColor => this._activeColor;
+  set activeColor ( Color index ){
+    this._activeColor = index;
+  }
+
+  Color get inactiveColor => this._inactiveColor;
+  set inactiveColor ( Color index ){
+    this._inactiveColor = index;
+  }
+  }
 
 
-}

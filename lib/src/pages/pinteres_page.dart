@@ -31,6 +31,7 @@ class _PinteresMenuLocation extends StatelessWidget {
 
     final widthPantalla = MediaQuery.of(context).size.width;
     final mostrar = Provider.of<_MenuModel>(context).mostrar;
+
     return Positioned(
       bottom: 30,
       child: Container(
@@ -38,6 +39,14 @@ class _PinteresMenuLocation extends StatelessWidget {
         child: Align(
           child: PinteresMenu(
             mostrar: mostrar,
+            activeColor: Colors.red,
+            inactiveColor: Colors.lightGreen,
+            items: [
+              PinteresButton(icon:Icons.pie_chart,onPressed: (){print('icon pie_chart');}),
+              PinteresButton(icon:Icons.search,onPressed: (){print('icon search');}),
+              PinteresButton(icon:Icons.notification_important,onPressed: (){print('icon notification_important');}),
+              PinteresButton(icon:Icons.supervised_user_circle,onPressed: (){print('icon supervised_user_circle');})
+            ],
           ),
         ),
       ),
