@@ -1,11 +1,9 @@
 
 import 'package:backgroundscustompainter/src/pages/emergency_page.dart';
+import 'package:backgroundscustompainter/src/pages/sliver_list_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:backgroundscustompainter/src/pages/pinteres_page.dart';
-
-
-
 
 void main() => runApp(MyApp());
 
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: EmergencyPage(),
+      home: SliverListPage(),
     );
   }
 }
