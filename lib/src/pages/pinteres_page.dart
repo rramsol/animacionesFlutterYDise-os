@@ -1,3 +1,4 @@
+import 'package:backgroundscustompainter/src/theme/theme.dart';
 import 'package:backgroundscustompainter/src/widgets/pinteres_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -31,6 +32,7 @@ class _PinteresMenuLocation extends StatelessWidget {
 
     final widthPantalla = MediaQuery.of(context).size.width;
     final mostrar = Provider.of<_MenuModel>(context).mostrar;
+    final appTheme = Provider.of<themeChanger>(context).currentTheme;
 
     return Positioned(
       bottom: 30,
@@ -39,8 +41,9 @@ class _PinteresMenuLocation extends StatelessWidget {
         child: Align(
           child: PinteresMenu(
             mostrar: mostrar,
-            activeColor: Colors.red,
-            inactiveColor: Colors.lightGreen,
+            backgroundMenu: appTheme.scaffoldBackgroundColor,
+            activeColor: appTheme.accentColor,
+            inactiveColor: Colors.pink,
             items: [
               PinteresButton(icon:Icons.pie_chart,onPressed: (){print('icon pie_chart');}),
               PinteresButton(icon:Icons.search,onPressed: (){print('icon search');}),

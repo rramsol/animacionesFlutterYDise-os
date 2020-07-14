@@ -1,5 +1,7 @@
+import 'package:backgroundscustompainter/src/theme/theme.dart';
 import 'package:backgroundscustompainter/src/widgets/redial_progress.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GraficasCircularesPage extends StatefulWidget {
 
@@ -14,6 +16,9 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<themeChanger>(context).currentTheme;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.refresh),
@@ -35,7 +40,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
           child: RadialProgressMio(
             porcentaje: porcentaje,
             colorPrimario: Colors.green,
-            colorSecundario: Colors.red,
+            colorSecundario: appTheme.textTheme.bodyText1.color,
           ),
         ),
       ),

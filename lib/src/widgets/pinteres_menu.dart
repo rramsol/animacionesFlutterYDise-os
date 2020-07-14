@@ -18,12 +18,14 @@ class PinteresMenu extends StatelessWidget {
   final bool mostrar;
   final Color activeColor;
   final Color inactiveColor;
+  final Color backgroundMenu;
   final List<PinteresButton> items;
 
   PinteresMenu({
     this.mostrar = true,
     this.activeColor = Colors.black,
     this.inactiveColor =Colors.blueGrey,
+    this.backgroundMenu = Colors.white,
     @required this.items,
   });
 
@@ -36,6 +38,7 @@ class PinteresMenu extends StatelessWidget {
         duration: Duration(milliseconds: 400),
         opacity: ( mostrar ) ? 1 : 0 ,
         child: _PinteresMenuBackground(
+          backgroundMenu: backgroundMenu,
           child: Builder(
             builder: (context){
               Color activeColor =  Provider.of<_MenuModel>(context).activeColor = this.activeColor;
@@ -52,8 +55,9 @@ class PinteresMenu extends StatelessWidget {
 class _PinteresMenuBackground extends StatelessWidget {
 
   final Widget child;
+  final Color backgroundMenu;
 
-  _PinteresMenuBackground({ @required this.child});
+  _PinteresMenuBackground({ @required this.child,this.backgroundMenu });
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +66,7 @@ class _PinteresMenuBackground extends StatelessWidget {
       width: 250,
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: this.backgroundMenu,
         borderRadius: BorderRadius.all( Radius.circular(100) ),
         boxShadow:<BoxShadow>[
           BoxShadow(
@@ -128,9 +132,9 @@ class _MenuModel with ChangeNotifier{
   int _itemSeleccionado = 0;
   Color _activeColor =Colors.red ;
   Color _inactiveColor =Colors.yellowAccent;
+  Color _backgroundMenu = Colors.white;
 
   int get itemSeleccionado => this._itemSeleccionado;
-
   set itemSeleccionado ( int index ){
     this._itemSeleccionado = index;
     notifyListeners();
@@ -145,6 +149,12 @@ class _MenuModel with ChangeNotifier{
   set inactiveColor ( Color index ){
     this._inactiveColor = index;
   }
+
+  Color get backgroundMenu => this._backgroundMenu;
+  set backgroundMenu ( Color index ){
+    this._backgroundMenu = index;
+  }
+
   }
 
 
