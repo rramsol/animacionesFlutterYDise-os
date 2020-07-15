@@ -9,9 +9,16 @@ class SlideShowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    bool isLarge;
     final appTheme = Provider.of<themeChanger>(context);
-    return Scaffold(
-      body: SlideShowMyWidget(
+
+    if( MediaQuery.of(context).size.height > 500 ){
+      isLarge = true;
+    }else {
+      isLarge=false;
+    }
+    final children = [
+      Expanded(child: SlideShowMyWidget(
         tamanoPuntoPrimario: 20,
         tamanoPuntoSecundario: 15,
         puntosArriba: false,
@@ -23,7 +30,30 @@ class SlideShowPage extends StatelessWidget {
           SvgPicture.asset('assets/svg/4.svg'),
           SvgPicture.asset('assets/svg/5.svg'),
         ],
+      ),
+      ),
+      Expanded(child: SlideShowMyWidget(
+        tamanoPuntoPrimario: 20,
+        tamanoPuntoSecundario: 15,
+        puntosArriba: false,
+        colorPrimario: (appTheme.darkTheme) ?  appTheme.currentTheme.accentColor:Colors.green,
+        slides: <Widget>[
+          SvgPicture.asset('assets/svg/1.svg'),
+          SvgPicture.asset('assets/svg/2.svg'),
+          SvgPicture.asset('assets/svg/3.svg'),
+          SvgPicture.asset('assets/svg/4.svg'),
+          SvgPicture.asset('assets/svg/5.svg'),
+        ],
+      ),
       )
+    ];
+
+
+
+    return Scaffold(
+      body: ( isLarge )
+              ? Column ( children: children,)
+              : Row ( children: children,)
     );
 
   }

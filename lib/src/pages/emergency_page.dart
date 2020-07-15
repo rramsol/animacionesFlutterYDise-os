@@ -1,8 +1,10 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:backgroundscustompainter/src/theme/theme.dart';
 import 'package:backgroundscustompainter/src/widgets/Boton_gordo.dart';
 import 'package:backgroundscustompainter/src/widgets/headers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class ItemBoton {
 
@@ -18,6 +20,15 @@ class EmergencyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    bool isLarge;
+    final appTheme = Provider.of<themeChanger>(context);
+
+    if( MediaQuery.of(context).size.height > 500 ){
+      isLarge = true;
+    }else {
+      isLarge=false;
+    }
 
     final items = <ItemBoton>[
       new ItemBoton( FontAwesomeIcons.carCrash, 'Motor Accident', Color(0xff6989F5), Color(0xff906EF5) ),
@@ -50,16 +61,17 @@ class EmergencyPage extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(top: 200),
+            margin: EdgeInsets.only(top: (isLarge)?220:10),
             child: ListView(
               physics: BouncingScrollPhysics(),
               children: <Widget>[
+                if( isLarge )
                 SizedBox(height: 80,),
                 ...itemMap
               ],
             ),
           ),
-
+          if ( isLarge)
           _Encabezado(),
         ],
 
